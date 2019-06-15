@@ -15,7 +15,7 @@ ReactDOM.render(
 class Tick extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {date: new Date()};
+        this.state = {date: new Date(), count: 0};
     }
     componentDidMount() {
         this.timerID = setInterval(
@@ -32,17 +32,21 @@ class Tick extends React.Component {
         this.setState({
             date: new Date()
         });
+        this.setState((state, props) => (
+            {count: state.count + props.increment}
+        ));
     }
     render() {
         return <div>
             <h1>Tick-Tock component</h1>
             <h2>It is {this.state.date.toLocaleDateString()} {this.state.date.toLocaleTimeString()}</h2>
+            <div>update count is {this.state.count}</div>
         </div>
     };
 }
 
 ReactDOM.render(
-    <Tick />,
+    <div><Tick increment={1} /><Tick increment={2} /><Tick increment={3} /></div>,
     document.getElementById('tick-tock')
 )
 
