@@ -27,6 +27,52 @@ function tick() {
 
 setInterval(tick, 1000);
 
+function Welcome(props) {
+    return <h1>Hello {props.name}</h1>;
+}
+const welcomeElement = <Welcome name="Sara"></Welcome>;
+// ReactDOM.render(
+//     welcomeElement,
+//     document.getElementById('welcome')
+// )
+
+
+// this class has same meaning as previous function
+class WelcomeComponent extends React.Component {
+    render() {
+      return <h1>Hello, {this.props.name}</h1>;
+    }
+  }
+const welcomeClassElement = <WelcomeComponent name="Jake"></WelcomeComponent>;
+// ReactDOM.render(
+//     welcomeClassElement,
+//     document.getElementById('welcome-class')
+// )
+
+setInterval(() => {
+    let element;
+    if(new Date().getSeconds() % 2 === 0){
+        element = welcomeElement;
+    } else {
+        element = welcomeClassElement;
+    }
+    ReactDOM.render(
+        element,
+        document.getElementById('welcome')
+    );
+})
+
+ReactDOM.render(
+    <div>
+        <Welcome name="Make" />
+        <WelcomeComponent name="Jude" />
+        <Welcome name="Patrick" />
+    </div>,
+    document.getElementById('welcomes')
+);
+
+
+
 // ReactDOM.render(<App />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
